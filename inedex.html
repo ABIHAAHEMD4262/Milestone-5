@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editable Resume Builder</title>
+  <link rel="stylesheet" href="styles/style.css">
+  <script src="script.js" defer></script>
+
+</head>
+<body>
+  <h1 class="Header">Dynamic Editable Resume Builder</h1>
+
+  <!-- Form to capture user data -->
+  <form id="resume-form">
+    <h2>Enter Your Information</h2>
+    <label for="name">Name:</label>
+    <input type="text" id="name" required>
+    <label for="email">Email:</label>
+    <input type="email" id="email" required>
+    <label for="phone">Phone:</label>
+    <input type="tel" id="phone" required>
+    <label for="education">Education:</label>
+    <input type="text" id="education" required>
+    <label for="work">Work Experience:</label>
+    <textarea id="work" required></textarea>
+    <label for="skills">Skills (comma-separated):</label>
+    <input type="text" id="skills" required>
+    <button type="button" id="generate-resume">Generate Resume</button>
+  </form>
+
+  <!-- Resume display section -->
+  <section class="resume-display" id="resume-display">
+    <h2>Your Resume</h2>
+    <div id="personal-info" class="resume-section editable" contenteditable="true">
+      <h3>Personal Information</h3>
+      <p><strong></strong> <span id="display-name"></span></p>
+      <p><strong></strong> <span id="display-email"></span></p>
+      <p><strong></strong> <span id="display-phone"></span></p>
+    </div>
+    <div id="education-section" class="resume-section editable" contenteditable="true">
+      <h3></h3>
+      <p id="display-education"></p>
+    </div>
+    <div id="work-experience" class="resume-section editable" contenteditable="true">
+      <h3>Work Experience</h3>
+      <p id="display-work"></p>
+    </div>
+    <div id="skills-section" class="resume-section editable" contenteditable="true">
+      <h3>Skills</h3>
+      <p id="display-skills"></p>
+    </div>
+    <footer>
+      <p class="footer">&copy; 2024 Resume Builder. Created with ❤️ by Abiha Ahmed.</p>
+    </footer>
+  </section>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

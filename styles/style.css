@@ -1,0 +1,78 @@
+/* styles.css */
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background: linear-gradient(to right, #3b82f6, #a855f7, #ec4899);
+  color: #fff;
+}
+
+h1, h2, h3 {
+  color: #fff;
+}
+
+form, .resume-display {
+  background: #ffffff1a;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+}
+
+input, textarea, button {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 4px;
+  border: none;
+}
+
+button {
+  background-color: #3b82f6;
+  color: #fff;
+  cursor: pointer;
+}
+
+.resume-section {
+  margin-top: 20px;
+}
+
+.editable {
+  outline: 1px dashed transparent;
+  transition: outline-color 0.3s;
+}
+
+.editable:focus {
+  outline-color: #3b82f6;
+}
+/* Editable sections styling */
+.editable {
+  background-color: #f3f4f6;
+  border: 1px dashed #a855f7;
+  padding: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #333;
+  transition: background-color 0.3s ease;
+}
+
+.editable:focus {
+  outline: none;
+  background-color: #e0e7ff;
+}
+
+.editable:empty {
+  color: #ccc; /* Placeholder color when content is empty */
+}
+
+.footer{
+  margin-left: 200px;
+}
+
+.Header{
+  margin-left: 150px;
+  color: white;
+}
