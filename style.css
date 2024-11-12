@@ -76,3 +76,13 @@ button {
   margin-left: 150px;
   color: white;
 }
+
+/* Style for the shareable link */
+#shareable-link {
+  background-color: #f3f4f6;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 10px;
+  color: #333;
+}
+

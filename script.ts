@@ -56,3 +56,59 @@ function generateResume(): void {
 
 // Button event listener with optional chaining
 document.getElementById("generate-resume")?.addEventListener("click", generateResume);
+
+// Function to download the resume as a text file
+function downloadResume(): void {
+  const resumeContent = resumeDisplay.innerHTML; // Get the HTML content of the resume
+  const blob = new Blob([resumeContent], { type: "text/html" }); // Create a Blob object with the content
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "resume.html"; // Set the filename for download
+  link.click();
+}
+
+// Function to generate a shareable link
+function generateShareableLink(): void {
+  const name = (document.getElementById("name") as HTMLInputElement).value;
+  const email = (document.getElementById("email") as HTMLInputElement).value;
+  const phone = (document.getElementById("phone") as HTMLInputElement).value;
+  const education = (document.getElementById("education") as HTMLInputElement).value;
+  const work = (document.getElementById("work") as HTMLTextAreaElement).value;
+  const skills = (document.getElementById("skills") as HTMLInputElement).value;
+
+  // Create an object with resume data
+  const resumeData = { name, email, phone, education, work, skills };
+  const encodedData = encodeURIComponent(JSON.stringify(resumeData)); // Encode resume data
+
+  // Generate a link with encoded data
+  const link = `${window.location.origin}${window.location.pathname}?data=${encodedData}`;
+  const linkText = document.getElementById("link-text") as HTMLSpanElement;
+  linkText.textContent = link;
+
+  // Display the link for sharing
+  document.getElementById("shareable-link")!.style.display = "block";
+}
+
+// Parse URL to load data if it exists (for shared link)
+function loadSharedData(): void {
+  const params = new URLSearchParams(window.location.search);
+  if (params.has("data")) {
+    const decodedData = JSON.parse(decodeURIComponent(params.get("data")!));
+    (document.getElementById("name") as HTMLInputElement).value = decodedData.name;
+    (document.getElementById("email") as HTMLInputElement).value = decodedData.email;
+    (document.getElementById("phone") as HTMLInputElement).value = decodedData.phone;
+    (document.getElementById("education") as HTMLInputElement).value = decodedData.education;
+    (document.getElementById("work") as HTMLTextAreaElement).value = decodedData.work;
+    (document.getElementById("skills") as HTMLInputElement).value = decodedData.skills;
+    generateResume(); // Automatically generate the resume with loaded data
+  }
+}
+
+// Event listeners
+document.getElementById("generate-resume")?.addEventListener("click", generateResume);
+document.getElementById("download-resume")?.addEventListener("click", downloadResume);
+document.getElementById("generate-link")?.addEventListener("click", generateShareableLink);
+
+// Load shared data if available in URL
+window.addEventListener("load", loadSharedData);
+

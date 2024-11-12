@@ -1,4 +1,4 @@
-var _a;
+var _a, _b, _c, _d;
 // Access form and display section with type assertions
 var form = document.getElementById("resume-form");
 var resumeDisplay = document.getElementById("resume-display");
@@ -50,3 +50,50 @@ function generateResume() {
 }
 // Button event listener with optional chaining
 (_a = document.getElementById("generate-resume")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", generateResume);
+// Function to download the resume as a text file
+function downloadResume() {
+    var resumeContent = resumeDisplay.innerHTML; // Get the HTML content of the resume
+    var blob = new Blob([resumeContent], { type: "text/html" }); // Create a Blob object with the content
+    var link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "resume.html"; // Set the filename for download
+    link.click();
+}
+// Function to generate a shareable link
+function generateShareableLink() {
+    var name = document.getElementById("name").value;
+    var email = document.getElementById("email").value;
+    var phone = document.getElementById("phone").value;
+    var education = document.getElementById("education").value;
+    var work = document.getElementById("work").value;
+    var skills = document.getElementById("skills").value;
+    // Create an object with resume data
+    var resumeData = { name: name, email: email, phone: phone, education: education, work: work, skills: skills };
+    var encodedData = encodeURIComponent(JSON.stringify(resumeData)); // Encode resume data
+    // Generate a link with encoded data
+    var link = "".concat(window.location.origin).concat(window.location.pathname, "?data=").concat(encodedData);
+    var linkText = document.getElementById("link-text");
+    linkText.textContent = link;
+    // Display the link for sharing
+    document.getElementById("shareable-link").style.display = "block";
+}
+// Parse URL to load data if it exists (for shared link)
+function loadSharedData() {
+    var params = new URLSearchParams(window.location.search);
+    if (params.has("data")) {
+        var decodedData = JSON.parse(decodeURIComponent(params.get("data")));
+        document.getElementById("name").value = decodedData.name;
+        document.getElementById("email").value = decodedData.email;
+        document.getElementById("phone").value = decodedData.phone;
+        document.getElementById("education").value = decodedData.education;
+        document.getElementById("work").value = decodedData.work;
+        document.getElementById("skills").value = decodedData.skills;
+        generateResume(); // Automatically generate the resume with loaded data
+    }
+}
+// Event listeners
+(_b = document.getElementById("generate-resume")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", generateResume);
+(_c = document.getElementById("download-resume")) === null || _c === void 0 ? void 0 : _c.addEventListener("click", downloadResume);
+(_d = document.getElementById("generate-link")) === null || _d === void 0 ? void 0 : _d.addEventListener("click", generateShareableLink);
+// Load shared data if available in URL
+window.addEventListener("load", loadSharedData);
